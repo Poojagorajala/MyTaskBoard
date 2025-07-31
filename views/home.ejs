@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home - Task Manager</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Welcome, <%= user.user_name %>!</h1>
+      <p class="user-email">Email: <%= user.user_email %></p>
+    </header>
+
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="/task/create" class="nav-button">➕ Create Task</a></li>
+        <li><a href="/task/all" class="nav-button">📋 View All</a></li>
+        <li><a href="/users/logout" class="nav-button logout">🚪 Logout</a></li>
+      </ul>
+    </nav>
+
+    <section class="task-section">
+      <h2>🗂️ All Tasks</h2>
+
+      <ul class="task-list">
+        <% tasks.forEach(t => { %>
+          <li class="task-card">
+            <div class="task-header">
+              <strong class="task-title"><%= t.task_name %></strong>
+              <p class="task-desc"><%= t.task_description %></p>
+              <small class="task-author">👤 Created by: <%= t.task_author %></small>
+            </div>
+
+            <% if (t.user_id === user.user_id) { %>
+              <div class="task-actions">
+                <a href="/task/update/<%= t.task_id %>" class="edit-btn">✏️ Edit</a>
+                <form action="/task/delete/<%= t.task_id %>" method="POST" class="delete-form">
+                  <button type="submit" class="delete-btn">🗑️ Delete</button>
+                </form>
+              </div>
+            <% } %>
+          </li>
+        <% }); %>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

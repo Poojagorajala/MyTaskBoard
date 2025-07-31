@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Tasks which is created by user</title>
+   <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <h1>Edit Task</h1>
+
+<form action="/task/update/<%=task.task_id%>" method="POST">
+    <label for="task_name">Task Name:</label>
+    <input type="text" id="task_name" name="task_name" value="<%= task.task_name %>" required><br><br>
+
+    <label for="task_description">Task Description:</label>
+    <textarea id="task_description" name="task_description" rows="1" required><%= task.task_description %></textarea><br><br>
+
+    <button type="submit">Update Task</button>
+</form>
+
+<a href="/task/all">Back to All Tasks</a>
+</body>
+</html>

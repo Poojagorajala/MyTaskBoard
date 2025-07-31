@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>All Tasks</title>
+   <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <h1>All Tasks</h1>
+
+  <ul>
+    <% tasks.forEach(t=> { %>
+      <li>
+        <strong>
+          <%= t.task_name %>
+        </strong> - <%= t.task_description %><br>
+          <small>Created by: <%= t.task_author %></small><br>
+
+          <% if (t.user_id===sessionUserId) { %>
+            <a href="/task/update/<%= t.task_id %>">Edit</a> |
+            <form action="/task/delete/<%= t.task_id %>" method="POST" style="display:inline;">
+              <button type="submit">Delete</button>
+            </form>
+            <% } %>
+      </li>
+      <hr />
+      <% }); %>
+  </ul>
+
+  <a href="/task/create">Create New Task</a><br>
+  <a href="/users/home">Back to Home</a>
+</body>
+
+</html>
